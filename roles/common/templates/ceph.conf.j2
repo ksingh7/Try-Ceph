@@ -1,0 +1,35 @@
+[global]
+  auth cluster required = cephx
+  auth service required = cephx
+  auth client required = cephx
+  fsid = {{ fsid }}
+  cluster network = {{ cluster_network }}
+  public network = {{ public_network }}
+
+  osd pool default pg num = {{ pool_default_pg_num }}
+  osd pool default pgp num = {{ pool_default_pgp_num }}
+
+[mon]
+  mon initial members = {{ groups.mons.0 }}
+  mon host = {{ groups.mons.0 }}
+  mon addr = {{ hostvars[groups.mons.0]['ansible_' + monitor_interface ]['ipv4']['address'] }}
+  
+  mon clock drift allowed    = {{ mon_clock_drift_allowed }} 
+  mon clock drift warn backoff = {{ mon_clock_drift_warn_backoff }} 
+
+
+[mon.{{ groups.mons.0 }}]           
+    host = {{ groups.mons.0 }}    
+    mon addr = {{ hostvars[groups.mons.0]['ansible_' + monitor_interface ]['ipv4']['address'] }}:6789
+
+
+###############-OSD_DEFINATION_STARTS_HERE-###############
+
+[osd]
+  osd pool default size = {{ pool_default_size }}
+  osd pool default min size = {{ pool_default_min_size }}
+  osd pool default crush rule = {{ pool_default_crush_rule }}
+
+  osd mkfs type = {{ osd_mkfs_type }}
+  osd journal size = {{ journal_size }}
+

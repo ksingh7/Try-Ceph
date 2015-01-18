@@ -1,0 +1,22 @@
+---
+- hosts: ceph-admin 
+  vars:
+   mon : false
+   monitor_1 : false
+  roles:
+  - common 
+  tasks:
+   - name: copying ceph.client.admin.keyring to admin node
+     copy: src=fetch/{{ groups.mon.0 }}/etc/ceph/ceph.client.admin.keyring dest=/etc/ceph/ceph.client.admin.keyring owner=root group=root mode=644
+
+   - name: copying ceph.conf to admin node 
+     copy: src=fetch/{{ groups.mon.0 }}/etc/ceph/ceph.conf dest=/etc/ceph/ceph.conf owner=root group=root mode=644
+
+   - name: copying OSD keyring to admin node 
+     copy: src=fetch/{{ groups.mon.0 }}/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/etc/ceph/ceph.bootstrap-osd.keyring owner=root group=root mode=644
+
+   - name: copying MDS keyring to admin node 
+     copy: src=fetch/{{ groups.mon.0 }}/var/lib/ceph/bootstrap-mds/ceph.keyring dest=/etc/ceph/ceph.bootstrap-mds.keyring owner=root group=root mode=644
+
+   - name: copying MON keyring to admin node
+     copy: src=fetch/{{ groups.mon.0 }}/var/lib/ceph/mon/ceph-{{ groups.mon.0 }}/keyring dest=/etc/ceph/ceph.mon.keyring owner=root group=root mode=644

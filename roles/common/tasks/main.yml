@@ -1,0 +1,74 @@
+---
+## Common to all nodes
+#
+
+- name: Install libselinux-python.x86_64
+  yum: name=libselinux-python.x86_64 state=latest
+
+- name: Copying Ceph key 
+  template: src=roles/common/templates/ceph-key dest=/tmp/ceph-key owner=root group=root mode=0644
+  ignore_errors: True
+
+- name: Importing Ceph GPG  key
+  command: rpm --import /tmp/ceph-key
+
+- name: Copying EPEL key
+  template: src=roles/common/templates/epel-key dest=/tmp/epel-key owner=root group=root mode=0644
+  ignore_errors: True
+
+- name: Importing EPEL GPG  key
+  command: rpm --import /tmp/epel-key
+
+- name: Adding EPEL to YUM repo repository
+  template: src=roles/common/templates/epel.repo.j2 dest=/etc/yum.repos.d/epel.repo owner=root group=root mode=0644
+  ignore_errors: True
+
+- name: Installing EPEL package
+  yum: name=epel-release.noarch state=latest
+
+- name: Installing dependancies from EPEL
+  yum: name={{ item }} state=latest
+  with_items:
+    - python-pycurl
+    - ntp
+    - snappy
+    - leveldb
+    - gdisk
+    - python-argparse
+    - gperftools-libs
+    - parted
+    - util-linux-ng.x86_64
+    - yum-plugin-priorities
+    - xfsprogs
+    - hdparm
+
+- name: Setting YUM plugin priorities
+  template: src=roles/common/templates/priorities.conf dest=/etc/yum/pluginconf.d/priorities.conf owner=root group=root mode=0644
+
+- name: Adding ceph to YUM repo
+  template: src=roles/common/templates/ceph.repo.j2 dest=/etc/yum.repos.d/ceph.repo owner=root group=root mode=0644
+
+
+- name: Creating directories required by ceph [/var/lib/ceph]
+  file: dest=/var/lib/ceph state=directory
+
+- name: Creating directories required by ceph [/var/lib/ceph/{{ item }}]
+  file: dest=/var/lib/ceph/{{ item }} state=directory
+  with_items:
+   - tmp
+   - mon
+   - bootstrap-osd
+
+- name: Creating directories required by ceph [/var/log/ceph]
+  file: dest=/var/log/ceph state=directory
+
+- name: Creating directories required by ceph [/etc/ceph]
+  file: dest=/etc/ceph state=directory
+
+- name: Installing Ceph packages
+  yum: name=ceph state=present enablerepo=ceph
+
+- name: Generating Ceph configuration file 
+  template: src=roles/common/templates/ceph.conf.j2 dest=/etc/ceph/ceph.conf owner=root group=root mode=0644
+
+

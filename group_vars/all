@@ -1,0 +1,73 @@
+---
+# Variables here are applicable to all host groups NOT roles
+
+# Setup options
+#distro_release: "{{ facter_lsbdistcodename }}"
+#server_model: "VirtualBox"
+
+ceph_ansible_version: 2.0
+#release_key: https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
+ceph_release: firefly 
+redhat_distro: el6 
+distro: centos6
+#EPEL_GPG_key: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+
+# Ceph options
+cephx: true
+fsid: 009d3518-e60d-4f74-a26d-c08c1976263c  
+monitor_secret: AQBAd1ZTyChrJhAAmaD/m93mrj1Z/wWh/gZRWw== 
+pool_default_pg_num: 64 
+pool_default_pgp_num: 64 
+pool_default_size: 3
+pool_default_min_size: 1
+pool_default_crush_rule: 0
+max_open_files: 131072
+
+# Monitors options
+monitor_interface: eth1
+mon_clock_drift_allowed: 100 
+mon_clock_drift_warn_backoff: 30
+mon_osd_down_out_interval: 600
+
+# OSD options
+journal_size: 100 
+cluster_network: 192.168.101.0/24
+public_network: 192.168.101.0/24
+osd_mkfs_type: xfs
+osd_mon_heartbeat_interval: 30
+osd_mount_options_xfs: "rw,noatime,inode64,logbsize=256k,delaylog,allocsize=4M"
+osd_mkfs_options_xfs: "-f -i size=2048"
+filestore_xattr_use_omap: 1
+filestore_merge_threshold: 40
+filestore_split_multiple: 8
+filestore_op_threads: 32 
+osd_op_threads: 16 
+filestore_max_sync_interval: 15
+filestore_min_sync_interval: 10
+osd_op_thread: 32 
+osd_recovery_max_active: 5
+journal_max_write_bytes: 1073714824 
+journal_max_write_entries: 10000 
+journal_queue_max_ops: 50000 
+journal_queue_max_bytes: 10485760000 
+filestore_queue_max_ops: 25000
+filestore_queue_max_bytes: 10485760 
+
+filestore_queue_committing_max_ops: 5000
+filestore_queue_committing_max_bytes: 10485760000 
+osd_max_backfills: 2
+osd_max_write_size: 512
+osd_client_message_size_cap: 2048 
+osd_recovery_op_priority: 2
+osd_recovery_max_chunk: 8388608
+osd_recovery_threads: 1
+rbd_cache: true
+rbd_cache_size: 268435456 
+rbd_cache_max_dirty: 134217728
+
+
+devices: [
+'/dev/sdb',
+'/dev/sdc',
+]
+

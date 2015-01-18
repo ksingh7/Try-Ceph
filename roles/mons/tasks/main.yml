@@ -1,0 +1,50 @@
+---
+## Deploy Ceph monitor(s)
+#
+
+- name: Creating monitor initial keyring
+  command: ceph-authtool /var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} --create-keyring --name=mon. --add-key={{ monitor_secret }} --cap mon 'allow *' creates=/var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }}
+
+
+- name: Setting initial monitor key permissions
+  file: path=/var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} mode=0600 owner=root group=root
+
+
+- name: Creating monitor directory
+  file: path=/var/lib/ceph/mon/ceph-{{ ansible_hostname }} state=directory owner=root group=root mode=0644
+
+
+- name: Creating administrator keyring , Generating a client.admin user and adding the user to the keyring
+  command: ceph-authtool --create-keyring /etc/ceph/ceph.client.admin.keyring --add-key={{ monitor_secret }} --name=client.admin --set-uid=0 --cap mon 'allow *' --cap osd 'allow *' --cap mds 'allow'  creates=/etc/ceph/ceph.client.admin.keyring
+
+
+- name: Adding the client.admin key to the ceph.mon.keyring. 
+  command: ceph-authtool /var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} --import-keyring /etc/ceph/ceph.client.admin.keyring
+
+
+- name: Generating a monitor map using the hostname,host IP address and the FSID. Save it as /tmp/monmap 
+  command: monmaptool --create --add {{ ansible_hostname }} {{ hostvars[groups.mons.0]['ansible_' + monitor_interface ]['ipv4']['address'] }}  --fsid {{ fsid }} /tmp/monmap --clobber 
+
+
+- name: Populating the monitor daemon with the monitor map and keyring. 
+  command: ceph-mon --mkfs -i {{ ansible_hostname }} --monmap /tmp/monmap --keyring /var/lib/ceph/tmp/keyring.mon.{{ ansible_hostname }} creates=/var/lib/ceph/mon/ceph-{{ ansible_hostname }}/keyring
+
+
+- name: Start and add that the monitor service to the init sequence
+  service: name=ceph state=started enabled=yes args=mon
+
+
+- name: Adding the new monitor to the cluster
+  command: ceph mon add {{ ansible_hostname }} {{ hostvars[groups.mons.0]['ansible_' + monitor_interface ]['ipv4']['address'] }}:6789
+  ignore_errors: True
+
+- name: Copy keys to the ansible server under fetch dirctory
+  fetch: src={{ item }} dest=fetch/
+  with_items:
+    - /var/lib/ceph/bootstrap-osd/ceph.keyring # this handles the non-colocation case
+    - /var/lib/ceph/mon/ceph-{{ groups.mons.0 }}/keyring
+    - /etc/ceph/ceph.bootstrap-osd.keyring
+    - /etc/ceph/ceph.mon.keyring
+    - /etc/ceph/ceph.conf
+    - /etc/ceph/ceph.client.admin.keyring
+
