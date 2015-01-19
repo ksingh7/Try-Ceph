@@ -35,7 +35,6 @@ end
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 config.vm.box = 'TryCeph-ksingh'
 config.vm.box_url = 'https://www.dropbox.com/s/man87m5ywc5je2e/package.box?dl=1'
-#config.vm.box_url = 'file://package.box'
 config.ssh.pty = true
   config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagrant/issues/5048
 
@@ -44,7 +43,6 @@ config.ssh.pty = true
     config.vm.define "mon#{i}" do |mon|
       mon.vm.hostname = "mon#{i}"
       mon.vm.network :private_network, ip: "#{SUBNET}.1#{i}"
-      mon.vm.network "forwarded_port", guest: 5000, host: 8080
       mon.vm.provider :virtualbox do |vb|
         vb.customize ['modifyvm', :id, '--memory', '192']
       end

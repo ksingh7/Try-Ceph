@@ -11,17 +11,6 @@
   sudo: True
   roles:
   - mons 
-  tasks:
-    - name: Install git
-      yum: name=git state=latest
-
-    - name: Cloning ceph-dash from github
-      git: repo=git://github.com/Crapworks/ceph-dash.git dest=/etc/ceph/ceph-dash accept_hostkey=yes
-
-    - name: Executing ceph-dash
-      command: python /etc/ceph/ceph-dash/ceph-dash.py
-      async: 36000
-      poll: 0
 
 - hosts: osds
   sudo: True

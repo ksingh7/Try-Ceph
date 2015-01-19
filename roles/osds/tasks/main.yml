@@ -14,32 +14,9 @@
   copy: src=fetch/127.0.0.1/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/etc/ceph/ceph.bootstrap-osd.keyring owner=root group=root mode=644
 
 
-#- name: Gathering keys from MON node to OSD node [ STEP-3 ]
-#  copy: src=fetch/127.0.0.1/var/lib/ceph/mon/ceph-127.0.0.1/keyring dest=/etc/ceph/ceph.mon.keyring owner=root group=root mode=644
-
-#- name: Gathering keys from MON node to OSD node [ STEP-4 ]
-#  copy: src=fetch/127.0.0.1/etc/ceph/ceph.client.admin.keyring dest=/etc/ceph/ceph.client.admin.keyring owner=root group=root mode=644
-
-#- name: Gathering keys from MON node to OSD node [ STEP-5 ]
-#  copy: src=fetch/127.0.0.1/etc/ceph/ceph.conf dest=/etc/ceph/ceph.conf owner=root group=root mode=644
-
-#- name: Gathering keys from MON node to OSD node [ STEP-6 ]
-#  command : touch /etc/ceph/ceph.log
-
 - name: Copying OSD bootstrap key to OSD node
   copy: src=fetch/127.0.0.1/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/var/lib/ceph/bootstrap-osd/ceph.keyring owner=root group=root mode=600
 
-
-
-- name: Unmounting disk if its already mounted 
-  command: chdir=/  umount {{ item }}1
-  with_items: devices
-  ignore_errors: True
-
-- name: Removing disk partition table and disk contents 
-  command: wipefs -a {{ item }}1
-  with_items: devices
-  ignore_errors: True
 
 - name: Zapping OSD 
   command: ceph-disk  zap {{ item }}
