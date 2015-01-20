@@ -239,6 +239,7 @@ $
 
 STEP - 4 : Check Ceph cluster status
 
+```
 $ vagrant ssh mon0 -c "sudo ceph -s"
     cluster 10c95f01-2dd2-4863-affa-60c4eafcd8d2
      health HEALTH_OK
@@ -249,7 +250,7 @@ $ vagrant ssh mon0 -c "sudo ceph -s"
                  192 active+clean
 Connection to 127.0.0.1 closed.
 $
-
+```
 
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
  
