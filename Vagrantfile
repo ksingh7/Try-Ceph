@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = '2'
 
 NMONS   = 1
-NOSDS   = 1
+NOSDS   = 3
 SUBNET  = '192.168.101'
 
 ansible_provision = proc do |ansible|
