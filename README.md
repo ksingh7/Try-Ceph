@@ -254,4 +254,4 @@ $
 
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
 
-![screenshot01](https://github.com/ksingh7/Try-Ceph/screenshot/ceph-dash.png) 
+![Try-Ceph Dashboard](https://raw.githubusercontent.com/ksingh7/Try-Ceph/master/screenshot/ceph-dash.png) 
