@@ -24,7 +24,7 @@ Prerequiste : Make sure your host machine should comply with the requirements me
 STEP - 1 : $ git clone https://github.com/ksingh7/Try-Ceph.git
 
 
-´´´´
+```
 
 $ git clone https://github.com/ksingh7/Try-Ceph.git
 Cloning into 'Try-Ceph'...
@@ -36,7 +36,7 @@ Resolving deltas: 100% (19/19), done.
 Checking connectivity... done.
 $
 
-´´´´
+```
 STEP - 2 : $ cd Try-Ceph
 
 STEP - 3 : $ vagrant up
