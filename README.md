@@ -260,3 +260,13 @@ $
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
 
 ![Try-Ceph Dashboard](https://raw.githubusercontent.com/ksingh7/Try-Ceph/master/screenshot/ceph-dash.png) 
+
+## To destroy the setup
+
+STEP - 1 : Check status of your  vagrant instances ``` $ vagrant status ```
+
+STEP - 2 : Halt vagrant instances ``` $ vagrant halt mon0 osd0 osd1 osd2 ```
+
+STEP - 3 : Destroy vagrant instances ``` $ vagrant destroy -f mon0 osd0 osd1 osd2 ```
+
+
