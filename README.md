@@ -21,7 +21,7 @@ Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for y
 
 Prerequiste : Make sure your host machine should comply with the requirements mentioned above. 
 
-STEP - 1 : $ git clone https://github.com/ksingh7/Try-Ceph.git
+STEP - 1 : ``` $ git clone https://github.com/ksingh7/Try-Ceph.git ```
 
 
 ```
@@ -35,9 +35,9 @@ Resolving deltas: 100% (19/19), done.
 Checking connectivity... done.
 $
 ```
-STEP - 2 : $ cd Try-Ceph
+STEP - 2 : ``` $ cd Try-Ceph ```
 
-STEP - 3 : $ vagrant up
+STEP - 3 : ``` $ vagrant up ```
 
 ```
 $ vagrant up
@@ -253,4 +253,5 @@ $
 ```
 
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
- 
+
+![screenshot01](https://github.com/ksingh7/Try-Ceph/screenshot/ceph-dash.png) 
