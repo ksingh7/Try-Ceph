@@ -25,7 +25,6 @@ STEP - 1 : $ git clone https://github.com/ksingh7/Try-Ceph.git
 
 
 ```
-
 $ git clone https://github.com/ksingh7/Try-Ceph.git
 Cloning into 'Try-Ceph'...
 remote: Counting objects: 127, done.
@@ -35,12 +34,12 @@ Receiving objects: 100% (127/127), 29.23 KiB | 0 bytes/s, done.
 Resolving deltas: 100% (19/19), done.
 Checking connectivity... done.
 $
-
 ```
 STEP - 2 : $ cd Try-Ceph
 
 STEP - 3 : $ vagrant up
 
+```
 $ vagrant up
 Bringing machine 'mon0' up with 'virtualbox' provider...
 Bringing machine 'osd0' up with 'virtualbox' provider...
@@ -236,17 +235,21 @@ mon0                       : ok=27   changed=22   unreachable=0    failed=0
 osd0                       : ok=20   changed=17   unreachable=0    failed=0
 
 $
-
+```
 
 STEP - 4 : Check Ceph cluster status
 
+$ vagrant ssh mon0 -c "sudo ceph -s"
+    cluster 10c95f01-2dd2-4863-affa-60c4eafcd8d2
+     health HEALTH_OK
+     monmap e1: 1 mons at {mon0=192.168.101.10:6789/0}, election epoch 2, quorum 0 mon0
+     osdmap e17: 6 osds: 6 up, 6 in
+      pgmap v25: 192 pgs, 3 pools, 0 bytes data, 0 objects
+            207 MB used, 65126 MB / 65333 MB avail
+                 192 active+clean
+Connection to 127.0.0.1 closed.
+$
+
 
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
-
-
-
-
-
-
-
  
