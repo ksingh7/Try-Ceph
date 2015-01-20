@@ -1,6 +1,6 @@
-# Try-Ceph : Goals & Objectives
+# Try-Ceph : What is it 
 
-Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for your testing purpose.
+Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for your testing purpose and learning purpose. Anyone who wants to have a quick look at CEPH , this is the fastes way to get to their first Ceph cluster.
 
 ## Try-Ceph features includes
 
@@ -8,7 +8,7 @@ Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for y
 * Automated Ceph installation and configuration within the box.
 * Installs and configure  ceph-dash : A Ceph graphical dashboard for monitoring.  
 * User can define number of Monitor and OSD nodes for the Ceph cluster.
-* Uses Vagrant --> Ansible --> Ceph --> Ceph-dash
+* It  uses Vagrant --> Ansible --> Ceph --> Ceph-dash
 
 ## Requirements
 
@@ -20,6 +20,7 @@ Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for y
 ## How to get started with Try-Ceph
 
 Prerequiste : Make sure your host machine should comply with the requirements mentioned above. 
+
 
 STEP - 1 : ``` $ git clone https://github.com/ksingh7/Try-Ceph.git ```
 
@@ -36,6 +37,10 @@ Checking connectivity... done.
 $
 ```
 STEP - 2 : ``` $ cd Try-Ceph ```
+
+```
+NOTE : By default vagrant will provision 1 MON and 1 OSD node , if you need more MON / OSD nodes , please change the NMONS and NOSDS parameteraunder  Vagrantfile.
+```
 
 STEP - 3 : ``` $ vagrant up ```
 
