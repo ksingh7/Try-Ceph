@@ -261,7 +261,7 @@ STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host
 
 ![Try-Ceph Dashboard](https://raw.githubusercontent.com/ksingh7/Try-Ceph/master/screenshot/ceph-dash.png) 
 
-## To destroy the setup
+## Destro Try-Ceph setup
 
 STEP - 1 : Check status of your  vagrant instances ``` $ vagrant status ```
 
