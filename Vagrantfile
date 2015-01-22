@@ -3,15 +3,15 @@
 
 VAGRANTFILE_API_VERSION = '2'
 
-NMONS   = 1
-NOSDS   = 3
+MONITORNO   = 1
+OSDNO   = 3
 SUBNET  = '192.168.101'
 
 ansible_provision = proc do |ansible|
   ansible.playbook = 'site.yml'
   ansible.groups = {
-    'mons' => (0..NMONS - 1).map { |j| "mon#{j}" },
-    'osds' => (0..NOSDS - 1).map { |j| "osd#{j}" },
+    'mons' => (0..MONITORNO - 1).map { |j| "mon#{j}" },
+    'osds' => (0..OSDNO - 1).map { |j| "osd#{j}" },
   }
 
   ansible.extra_vars = {
@@ -35,7 +35,7 @@ config.ssh.pty = true
 config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagrant/issues/5048
 
 
-  (0..NMONS - 1).each do |i|
+  (0..MONITORNO - 1).each do |i|
     config.vm.define "mon#{i}" do |mon|
       mon.vm.hostname = "mon#{i}"
       mon.vm.network :private_network, ip: "#{SUBNET}.1#{i}"
@@ -48,7 +48,7 @@ config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagr
     end
   end
 
-  (0..NOSDS - 1).each do |i|
+  (0..OSDNO - 1).each do |i|
     config.vm.define "osd#{i}" do |osd|
       osd.vm.hostname = "osd#{i}"
       osd.vm.network :private_network, ip: "#{SUBNET}.10#{i}"
@@ -78,7 +78,7 @@ config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagr
       end
 
       # Run the provisioner after the last machine comes up
-      osd.vm.provision 'ansible', &ansible_provision if i == (NOSDS - 1)
+      osd.vm.provision 'ansible', &ansible_provision if i == (OSDNO - 1)
     end
   end
 end
