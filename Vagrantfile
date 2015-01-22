@@ -77,7 +77,6 @@ config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagr
         v.vmx['memsize'] = '192'
       end
 
-      # Run the provisioner after the last machine comes up
       osd.vm.provision 'ansible', &ansible_provision if i == (OSDNO - 1)
     end
   end
