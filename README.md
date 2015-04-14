@@ -20,6 +20,7 @@ Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for y
 ## How to get started with Try-Ceph
 
 Prerequiste : Make sure your host machine should comply with the requirements mentioned above. 
+Before "vagrant up" operation sometimes   ' git config --global url."https://".insteadOf git:// ' is needed to solve Ceph installation packages.
 
 
 STEP - 1 : ``` $ git clone https://github.com/ksingh7/Try-Ceph.git ```
