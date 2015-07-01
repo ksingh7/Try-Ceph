@@ -4,7 +4,7 @@
 VAGRANTFILE_API_VERSION = '2'
 
 MONITORNO   = 1
-OSDNO   = 3
+OSDNO   = 1
 SUBNET  = '192.168.101'
 
 ansible_provision = proc do |ansible|
