@@ -23,6 +23,11 @@
 - name: Adding ceph to YUM repo
   template: src=roles/common/templates/ceph.repo.j2 dest=/etc/yum.repos.d/ceph.repo owner=root group=root mode=0644
 
+- name: Disable firewalld
+  command: systemctl disable firewalld
+
+- name: Stop firewalld
+  command: systemctl stop firewalld
 
 - name: Creating directories required by ceph [/var/lib/ceph]
   file: dest=/var/lib/ceph state=directory
