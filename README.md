@@ -40,7 +40,7 @@ $
 STEP - 2 : ``` $ cd Try-Ceph ```
 
 ```
-NOTE : By default vagrant will provision 1 MON and 1 OSD node , if you need more MON / OSD nodes , please change the NMONS and NOSDS parameteraunder  Vagrantfile.
+NOTE : By default vagrant will provision 1 MON and 3 OSD node , if you need more MON / OSD nodes , please change the NMONS and NOSDS parameteraunder  Vagrantfile.
 ```
 
 STEP - 3 : ``` $ vagrant up ```
