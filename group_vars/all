@@ -8,8 +8,8 @@
 ceph_ansible_version: 2.0
 #release_key: https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
 ceph_release: hammer
-redhat_distro: el6 
-distro: centos6
+redhat_distro: el7 
+distro: centos7
 #EPEL_GPG_key: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
 
 # Ceph options

@@ -29,8 +29,7 @@ def create_vmdk(name, size)
 end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-config.vm.box = 'TryCeph-ksingh'
-config.vm.box_url = 'https://www.dropbox.com/s/man87m5ywc5je2e/package.box?dl=1'
+config.vm.box = 'nwl/centos7'
 config.ssh.pty = true
 config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagrant/issues/5048
 
