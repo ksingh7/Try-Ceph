@@ -1,11 +1,12 @@
 [global]
+# debug ms = 1
+# debug rgw = 20
   auth cluster required = cephx
   auth service required = cephx
   auth client required = cephx
   fsid = {{ fsid }}
   cluster network = {{ cluster_network }}
   public network = {{ public_network }}
-
   osd pool default pg num = {{ pool_default_pg_num }}
   osd pool default pgp num = {{ pool_default_pgp_num }}
 
@@ -33,3 +34,10 @@
   osd mkfs type = {{ osd_mkfs_type }}
   osd journal size = {{ journal_size }}
 
+############### RGW #################
+
+[client.radosgw.gateway]
+  rgw frontends = "civetweb port=80"
+  keyring = /etc/ceph/ceph.client.radosgw.keyring
+  host = {{ groups.mons.0 }}
+  log file = /var/log/radosgw/client.radosgw.gateway-node1.log

@@ -29,7 +29,7 @@ def create_vmdk(name, size)
 end
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-config.vm.box = 'nwl/centos7'
+config.vm.box = 'ceph/centos7'
 config.ssh.pty = true
 config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagrant/issues/5048
 

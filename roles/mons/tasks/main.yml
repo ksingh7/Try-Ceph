@@ -48,6 +48,7 @@
     - /etc/ceph/ceph.conf
     - /etc/ceph/ceph.client.admin.keyring
 
+###
 
 - name: Cloning ceph-dash from github
   git: repo=git://github.com/Crapworks/ceph-dash.git dest=/etc/ceph/ceph-dash accept_hostkey=yes
@@ -60,4 +61,25 @@
   async: 360000
   poll: 0
 
+###
 
+- name: Install RGW
+  command: yum -y install ceph-radosgw
+
+- name: Creating RGW keyring
+  command: ceph-authtool --create-keyring /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Setting RGW keyring persmissions
+  file: path=/etc/ceph/ceph.client.radosgw.keyring mode=0600 owner=root group=root
+
+- name: Generate key for RGW instance
+  command: ceph-authtool /etc/ceph/ceph.client.radosgw.keyring -n client.radosgw.gateway --gen-key
+
+- name: Add capabilities to RGW key
+  command: ceph-authtool -n client.radosgw.gateway --cap osd 'allow rwx' --cap mon 'allow rwx' /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Add RGW key to cluster
+  command: ceph -k /etc/ceph/ceph.client.admin.keyring auth add client.radosgw.gateway -i /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Start RGW
+  command: systemctl start ceph-radosgw
