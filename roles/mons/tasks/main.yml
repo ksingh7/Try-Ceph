@@ -31,7 +31,7 @@
 
 
 - name: Start and add that the monitor service to the init sequence
-  service: name=ceph state=started enabled=yes args=mon
+  service: name=ceph state=started enabled=yes
 
 
 - name: Adding the new monitor to the cluster
