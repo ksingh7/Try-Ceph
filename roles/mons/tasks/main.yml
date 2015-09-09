@@ -79,7 +79,7 @@
   command: ceph-authtool -n client.radosgw.gateway --cap osd 'allow rwx' --cap mon 'allow rwx' /etc/ceph/ceph.client.radosgw.keyring
 
 - name: Add RGW key to cluster
-  command: ceph -k /etc/ceph/ceph.client.admin.keyring auth add client.radosgw.gateway -i /etc/ceph/ceph.client.radosgw.keyring
+  command: ceph -k /etc/ceph/ceph.client.admin.keyring auth import -i /etc/ceph/ceph.client.radosgw.keyring
 
 - name: Start RGW
   command: systemctl start ceph-radosgw
