@@ -11,11 +11,11 @@
    - bootstrap-mds
 
 - name: Gathering keys from MON node to OSD node [ STEP-1 ]
-  copy: src=fetch/127.0.0.1/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/etc/ceph/ceph.bootstrap-osd.keyring owner=root group=root mode=644
+  copy: src=fetch/mon0/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/etc/ceph/ceph.bootstrap-osd.keyring owner=root group=root mode=644
 
 
 - name: Copying OSD bootstrap key to OSD node
-  copy: src=fetch/127.0.0.1/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/var/lib/ceph/bootstrap-osd/ceph.keyring owner=root group=root mode=600
+  copy: src=fetch/mon0/var/lib/ceph/bootstrap-osd/ceph.keyring dest=/var/lib/ceph/bootstrap-osd/ceph.keyring owner=root group=root mode=600
 
 
 - name: Zapping OSD 
