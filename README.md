@@ -474,6 +474,7 @@ STEP - 6 : To access object storage via S3
 STEP - 7 : To access object storage via SWIFT
 * Install swift cli tools to a node that have access to mon0 machine ( 192.168.101.10 )
 * Finally access object storage via Swift Call
+
 ``` # swift -A http://192.168.101.10/auth/1.0 -U demo:swift -K 'SwiftSecretKey' list ```
 
 ## Destro Try-Ceph setup
