@@ -5,6 +5,9 @@
 - name: Upgrading jinja2 for ceph-dash
   command: pip install --upgrade jinja2
 
+- name: Update ceph-dash.py
+  template: src=ceph-dash.py dest=/etc/ceph/ceph-dash/ceph-dash.py
+
 - name: Executing ceph-dash
   command: python /etc/ceph/ceph-dash/ceph-dash.py
   async: 360000
