@@ -17,6 +17,9 @@
 - name: Add RGW key to cluster
   command: ceph -k /etc/ceph/ceph.client.admin.keyring auth import -i /etc/ceph/ceph.client.radosgw.keyring
 
+- name: Updating hosts file 
+  template: src=hosts.j2 dest=/etc/hosts
+
 - name: Start RGW
   command: systemctl start ceph-radosgw
 
@@ -28,4 +31,10 @@
 
 - name: Adding Secret for Radow Gateway swift user
   command : radosgw-admin key create --subuser=demo:swift --key-type=swift --secret=SwiftSecretKey
+
+- name: Installing s3cmd
+  yum: name=s3cmd state=present
+
+- name: adding s3cmd configuration file
+  template: src=s3cfg.j2 dest=/root/.s3cfg
 

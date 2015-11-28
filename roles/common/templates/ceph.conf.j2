@@ -41,3 +41,4 @@
   keyring = /etc/ceph/ceph.client.radosgw.keyring
   host = {{ groups.mons.0 }}
   log file = /var/log/radosgw/client.radosgw.gateway-node1.log
+  rgw dns name = {{ groups.mons.0 }}
