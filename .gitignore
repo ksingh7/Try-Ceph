@@ -1,0 +1,5 @@
+.vagrant/
+ansible.log
+disk-*
+fetch
+requitements.yml

@@ -1,0 +1,5 @@
+---
+- include: dnsmasq.yml
+  tags: rgw
+- include: rgw.yml
+  tags: rgw

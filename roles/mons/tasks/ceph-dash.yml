@@ -1,0 +1,11 @@
+---
+- name: Cloning ceph-dash from github
+  git: repo=git://github.com/Crapworks/ceph-dash.git dest=/etc/ceph/ceph-dash accept_hostkey=yes
+
+- name: Upgrading jinja2 for ceph-dash
+  command: pip install --upgrade jinja2
+
+- name: Executing ceph-dash
+  command: python /etc/ceph/ceph-dash/ceph-dash.py
+  async: 360000
+  poll: 0

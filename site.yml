@@ -17,3 +17,12 @@
   roles:
   - osds 
 
+- hosts:
+   - mons
+  vars:
+    dnsmasq_listen_address: 127.0.0.1
+  sudo: True
+  tags: rgw
+  roles:
+  - rgw 
+
