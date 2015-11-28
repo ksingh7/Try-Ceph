@@ -37,6 +37,12 @@ Resolving deltas: 100% (19/19), done.
 Checking connectivity... done.
 $
 ```
+
+STEP - 1.1 : Install Ansible on the host machine , see the below instructions for your OS
+
+Ubuntu : https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-14-04
+CentOS : http://www.tecmint.com/install-and-configure-ansible-automation-tool-in-linux/
+
 STEP - 2 : ``` $ cd Try-Ceph ```
 
 ```
