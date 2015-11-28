@@ -484,3 +484,10 @@ STEP - 1 : Check status of your  vagrant instances ``` $ vagrant status ```
 STEP - 2 : Halt vagrant instances ``` $ vagrant halt mon0 osd0 osd1 osd2 ```
 
 STEP - 3 : Destroy vagrant instances ``` $ vagrant destroy -f mon0 osd0 osd1 osd2 ```
+
+## Troubleshooting
+
+If you encounter any problem during any step of ansible run , you can manually start ansible provisioning at the step it got stoppoed. Using the below command
+```
+# ansible-playbook site.yml -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory --private-key=~/.vagrant.d/insecure_private_key -u vagrant --start-at-task="Installing Ceph packages"
+```
