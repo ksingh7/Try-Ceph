@@ -1,0 +1,7 @@
+.vagrant/
+ansible.log
+disk-*
+fetch
+requitements.yml
+Try-Ceph/
+Vagrantfile.orig

@@ -1,0 +1,27 @@
+---
+- hosts: all
+  sudo: true
+  vars:
+    dnsmasq_listen_address: '192.168.6.66'
+    dnsmasq_domain_needed: true
+    dnsmasq_expand_hosts: true
+    dnsmasq_bogus_priv: true
+    dnsmasq_domain: 'example.lan'
+
+    dnsmasq_dhcp_ranges:
+      - start_addr: '192.168.6.150'
+        end_addr: '192.168.6.253'
+        lease_time: '8h'
+
+    dnsmasq_dhcp_hosts:
+      - name: 'alpha'
+        mac: '11:22:33:44:55:66'
+        ip: '192.168.6.10'
+      - name: 'bravo'
+        mac: 'aa:bb:cc:dd:ee:ff'
+        ip: '192.168.6.11'
+
+    dnsmasq_option_router: '192.168.6.254'
+
+  roles:
+    - dnsmasq

@@ -1,0 +1,40 @@
+---
+- name: Install RGW
+  command: yum -y install ceph-radosgw
+
+- name: Creating RGW keyring
+  command: ceph-authtool --create-keyring /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Setting RGW keyring persmissions
+  file: path=/etc/ceph/ceph.client.radosgw.keyring mode=0600 owner=root group=root
+
+- name: Generate key for RGW instance
+  command: ceph-authtool /etc/ceph/ceph.client.radosgw.keyring -n client.radosgw.gateway --gen-key
+
+- name: Add capabilities to RGW key
+  command: ceph-authtool -n client.radosgw.gateway --cap osd 'allow rwx' --cap mon 'allow rwx' /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Add RGW key to cluster
+  command: ceph -k /etc/ceph/ceph.client.admin.keyring auth import -i /etc/ceph/ceph.client.radosgw.keyring
+
+- name: Updating hosts file 
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: Start RGW
+  command: systemctl start ceph-radosgw
+
+- name: Creating Rados Gateway user for S3 Access
+  command : radosgw-admin user create --uid=demo --display-name="demo user" --email=demo@example.com --access-key=S3AccessKey --secret=S3SecretKey
+
+- name: Creating Rados Gateway Swift user
+  command : radosgw-admin subuser create --uid=demo --subuser=demo:swift --access=full
+
+- name: Adding Secret for Radow Gateway swift user
+  command : radosgw-admin key create --subuser=demo:swift --key-type=swift --secret=SwiftSecretKey
+
+- name: Installing s3cmd
+  yum: name=s3cmd state=present
+
+- name: adding s3cmd configuration file
+  template: src=s3cfg.j2 dest=/root/.s3cfg
+
