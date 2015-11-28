@@ -493,4 +493,4 @@ If you encounter any problem during any step of ansible run , you can manually s
 ```
 ## Video Demo
 
-![Click Here For Video Demo](https://youtu.be/Cs_92qxVhzg) 
+[Click Here For Video Demo](https://youtu.be/Cs_92qxVhzg) 
