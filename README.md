@@ -6,7 +6,8 @@ Try-Ceph requires bare mininum work to get your FIRST CEPH CLUSTER running for y
 
 * Quickest way to get your first test Ceph cluster up and running.
 * Automated Ceph installation and configuration within the box.
-* Installs and configure  ceph-dash : A Ceph graphical dashboard for monitoring.  
+* Installs and configure  ceph-dash : A Ceph graphical dashboard for monitoring.
+* Installs and configure Object Storage which is accessible via S3 or Swift API
 * User can define number of Monitor and OSD nodes for the Ceph cluster.
 * It  uses Vagrant --> Ansible --> Ceph --> Ceph-dash
 
@@ -261,6 +262,19 @@ $
 STEP - 5 : To check status of your cluster using Ceph dashboard. Point your host browser to http://192.168.101.10:5000
 
 ![Try-Ceph Dashboard](https://raw.githubusercontent.com/ksingh7/Try-Ceph/master/screenshot/ceph-dash.png) 
+
+STEP - 6 : To access object storage via S3
+* Node mon0 is preconfigured for s3 which can be accessed via [s3cmd](http://s3tools.org/s3cmd)
+``` 
+    # vagrant ssh mon0 
+    $ sudo su -
+    # s3cmd ls                          # List S3 bucket
+    # s3cmd mb s3://first-bucket        # Make S3 bucket
+    # s3cmd ls                          # List S3 bucket
+```
+STEP - 7 : To access object storage via SWIFT
+* Install swift cli tools to a node that have access to mon0 machine ( 192.168.101.10 )
+``` # swift -A http://192.168.101.10/auth/1.0 -U demo:swift -K 'SwiftSecretKey' list ```
 
 ## Destro Try-Ceph setup
 
