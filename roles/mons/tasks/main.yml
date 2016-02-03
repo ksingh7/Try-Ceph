@@ -40,6 +40,7 @@
 
 - name: Copy keys to the ansible server under fetch dirctory
   fetch: src={{ item }} dest=fetch/
+  ignore_errors: True
   with_items:
     - /var/lib/ceph/bootstrap-osd/ceph.keyring # this handles the non-colocation case
     - /var/lib/ceph/mon/ceph-{{ groups.mons.0 }}/keyring
