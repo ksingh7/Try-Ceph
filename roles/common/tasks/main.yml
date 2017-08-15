@@ -3,6 +3,13 @@
 #
 
 
+- name: "set hostname"
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: "set git config http"
+  command: git config --global url."https://".insteadOf git://
+
 - name: Copying Ceph key 
   template: src=roles/common/templates/ceph-key dest=/tmp/ceph-key owner=root group=root mode=0644
   ignore_errors: True
