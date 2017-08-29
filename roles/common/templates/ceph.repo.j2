@@ -1,35 +1,35 @@
 [ceph]
 name=Ceph packages for $basearch
-baseurl=http://ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/$basearch
+baseurl=http://download.ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/$basearch
 enabled=1
 gpgcheck=1
 type=rpm-md
-gpgkey=https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
+gpgkey=https://download.ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
 priority=1
 
 [ceph-noarch]
 name=Ceph noarch packages
-baseurl=http://ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/noarch
+baseurl=http://download.ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/noarch
 enabled=1
 gpgcheck=1
 type=rpm-md
-gpgkey=https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
+gpgkey=https://download.ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
 priority=1
 
 [ceph-source]
 name=Ceph source packages
-baseurl=http://ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/SRPMS
+baseurl=http://download.ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/SRPMS
 enabled=0
 gpgcheck=1
 type=rpm-md
-gpgkey=https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
+gpgkey=https://download.ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
 priority=1
 
 [ceph-deploy]
 name=Ceph-deploy packages
-baseurl=http://ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/noarch
+baseurl=http://download.ceph.com/rpm-{{ ceph_release }}/{{ redhat_distro }}/noarch
 enabled=1
 gpgcheck=1
 type=rpm-md
-gpgkey=https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
+gpgkey=https://download.ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc
 priority=1
