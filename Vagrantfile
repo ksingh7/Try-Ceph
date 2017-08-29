@@ -36,7 +36,6 @@ config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagr
 
   (0..MONITORNO - 1).each do |i|
     config.vm.define "mon#{i}" do |mon|
-      mon.vm.hostname = "mon#{i}"
       mon.vm.network :private_network, ip: "#{SUBNET}.1#{i}"
       mon.vm.provider :virtualbox do |vb|
         vb.customize ['modifyvm', :id, '--memory', '192']
@@ -49,7 +48,6 @@ config.ssh.insert_key = false # workaround for https://github.com/mitchellh/vagr
 
   (0..OSDNO - 1).each do |i|
     config.vm.define "osd#{i}" do |osd|
-      osd.vm.hostname = "osd#{i}"
       osd.vm.network :private_network, ip: "#{SUBNET}.10#{i}"
       osd.vm.network :private_network, ip: "#{SUBNET}.20#{i}"
       osd.vm.provider :virtualbox do |vb|
