@@ -20,16 +20,16 @@
 
 - name: Zapping OSD 
   command: ceph-disk  zap {{ item }}
-  with_items: devices
+  with_items: "{{ devices }}"
   ignore_errors: True
 
 - name: Prepare OSD disk(s)
   command: ceph-disk prepare {{ item }}
-  with_items: devices
+  with_items: "{{ devices }}"
 
 - name: Activating  OSD 
   command: ceph-disk activate {{ item }}1 
-  with_items: devices
+  with_items: "{{ devices }}"
 
 - name: Start and add that the OSD service to the init sequence
   service: name=ceph state=started enabled=yes
